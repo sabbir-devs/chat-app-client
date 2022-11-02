@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import Chat from './Components/Chat/Chat';
+import Signup from './Components/Signup/Signup';
+import NotFound from './Components/NotFound/NotFound';
+import LoginUsers from './Components/LoginUsers/LoginUsers';
 
 function App() {
+  // const {user, isLoading, error} = useSelector((state) => state.user)
+  // console.log(user);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Header /> */}
+      <Routes>
+        <Route path='/' element={<Chat />}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/login' element={<LoginUsers />}></Route>
+        <Route path='/chat' element={<Chat />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+      <Toaster
+        position="top-right"
+        reverseOrder={true}
+      />
     </div>
   );
 }
