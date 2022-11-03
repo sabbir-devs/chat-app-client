@@ -4,9 +4,10 @@ import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import Loading from '../Loading/Loading';
 import { useEffect } from 'react';
-import { baseUrl } from '../../utils/constantData/constantData.ts';
+import { baseUrl } from '../../utils/constantData/constantData';
 import ChatUsers from './ChatUsers';
 import ChatBox from './ChatBox';
+import { io } from "socket.io-client";
 
 const Chat = () => {
     const { isLoading, user, error } = useSelector((state) => state.user)
@@ -46,9 +47,9 @@ const Chat = () => {
                 </div>
                 <div className="chat-list">
                     {chats?.map((chat) => (
-                    <div onClick={() => {setCurrentChat(chat)}}>
-                        <ChatUsers currentUserId={user._id} chat={chat} key={chat._id}></ChatUsers>
-                    </div>))}
+                        <div onClick={() => { setCurrentChat(chat) }}>
+                            <ChatUsers currentUserId={user._id} chat={chat} key={chat._id}></ChatUsers>
+                        </div>))}
                 </div>
             </div>
             {/* RIGHT SIDE Chat */}

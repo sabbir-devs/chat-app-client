@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import './Chat.css';
-import { baseUrl } from '../../utils/constantData/constantData.ts';
+import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
-import { format } from 'timeago.js';
+import {format} from 'timeago.js'
 import { BsImages } from 'react-icons/bs';
 import { IoSend } from 'react-icons/io5';
 import { BiConversation } from 'react-icons/bi';
@@ -77,14 +77,17 @@ const ChatBox = ({ currentChat, currentUser, }) => {
                     ))}
                 </div>
                 {/* Chat Sender */}
-                <div className="chat-sender">
+                    <div className='chat-sender-set-bottom'>
+                    <div className="chat-sender">
                     <button className="send-images" onClick={() => selectImage()}><BsImages></BsImages></button>
                     <InputEmoji style={{ width: "500px" }}
                         value={newMessages}
                         onChange={handleChange}
                     />
                     <div className='send-button'><IoSend className='send-button-icon'></IoSend></div>
-                </div></>) : (
+                </div>
+                    </div>
+                </>) : (
                 <div className='tap-on-chat'>
                     <p className='tap-on-chat-text'>Tap on a Chat to start Conversation <BiConversation style={{fontSize:"35px", margin:"10px 0 0 10px"}}></BiConversation></p>
                 </div>

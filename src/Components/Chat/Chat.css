@@ -82,7 +82,7 @@
   
 }
 .chat-box-conversesion{
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #cacaca;
   padding: 15px;
   width: 100%;
   position: relative;
@@ -115,12 +115,17 @@
   padding: 20px;
   display: block;
 }
+.chat-sender-set-bottom{
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+}
 .chat-sender{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  border-top: .5px solid #ddd;
+  border-top: 1px solid #cacaca;
   align-self: end;
 }
 .send-images{

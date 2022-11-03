@@ -2,7 +2,7 @@ import React from 'react';
 import './Chat.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { baseUrl } from '../../utils/constantData/constantData.ts';
+import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
 
 const ChatUsers = ({chat, currentUserId}) => {

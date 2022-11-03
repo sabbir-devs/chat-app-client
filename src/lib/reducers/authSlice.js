@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../utils/constantData/constantData.ts";
+import { baseUrl } from "../../utils/constantData/constantData";
 
 const user = JSON.parse(localStorage.getItem('user'))
 
