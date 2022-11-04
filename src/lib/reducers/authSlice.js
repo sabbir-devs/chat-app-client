@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 import { baseUrl } from "../../utils/constantData/constantData";
 
 const user = JSON.parse(localStorage.getItem('user'))
+
 
 export const signupUser = createAsyncThunk('signupuser', async (body) => {
     const res = await fetch(`${baseUrl}/user/signup`, {
@@ -10,7 +12,7 @@ export const signupUser = createAsyncThunk('signupuser', async (body) => {
             'content-type': 'application/json',
         },
         body: JSON.stringify(body)
-    })
+    });
     return await res.json();
 })
 export const loginUser = createAsyncThunk('loginuser', async (body) => {
@@ -20,7 +22,7 @@ export const loginUser = createAsyncThunk('loginuser', async (body) => {
             'content-type': 'application/json',
         },
         body: JSON.stringify(body)
-    })
+    });
     return await res.json();
 })
 

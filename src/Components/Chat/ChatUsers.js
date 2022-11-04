@@ -5,27 +5,25 @@ import { useState } from 'react';
 import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
 
-const ChatUsers = ({chat, currentUserId}) => {
+const ChatUsers = ({ chat, currentUserId }) => {
     const [userData, setUserData] = useState(null);
     console.log(chat)
     // console.log('current user id',currentUserId)
 
     useEffect(() => {
-        const userId = chat.members.find((id) => id!== currentUserId)
-        console.log('another user id', userId)
-        fetch(`${baseUrl}/user/${userId}`,{
-            method:'GET',
-            headers:{
-                'content-type':'application/json',
-                authorization:`Bearer ${localStorage.getItem('accessToken')}`
+        const userId = chat.members.find((id) => id !== currentUserId);
+        fetch(`${baseUrl}/user/${userId}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log('another user',data.data)
-            setUserData(data.data)
-        })
-    },[chat.members, currentUserId])
+            .then(res => res.json())
+            .then(data => {
+                setUserData(data.data)
+            })
+    }, [chat.members, currentUserId])
 
     return (
         <div className='follower conversation'>

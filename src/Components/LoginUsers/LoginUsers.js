@@ -29,6 +29,7 @@ const LoginUsers = () => {
         const forminput = { username, password };
         dispatch(loginUser(forminput))
         event.target.reset();
+
         
         // fetch(`${baseUrl}/user/login`, {
         //     method: "POST",

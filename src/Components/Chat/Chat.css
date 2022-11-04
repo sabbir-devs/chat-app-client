@@ -70,57 +70,52 @@
   font-size: 12px;
 }
 
-
-
-
-
-
-
-
 /*========================================== CHAT BOX ==========================================*/
-.chat-box-wrapper{
-  
+.chat-box-wrapper {
 }
-.chat-box-conversesion{
+.chat-box-conversesion {
   border-bottom: 1px solid #cacaca;
   padding: 15px;
   width: 100%;
   position: relative;
   top: 0;
 }
-.message{
-  display: inline-block;
-  align-items: center;
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   padding: 12px;
   border-radius: 15px;
-  background:  #00ffff;
-  max-width: 400px;
+  background: #00ffff;
   margin-top: 10px;
+  max-width: 45%;
 }
-.own{
+.own {
   align-self: flex-end;
   margin-left: auto;
   background: #31a24c;
-  display: block;
+  display: flex;
 }
-.message-text{
+.message-text {
   font-size: 17px;
   font-weight: 600;
 }
-.message-time{
+.message-time {
   font-size: 13px;
   font-weight: 600;
 }
-.chat-body{
+.chat-body {
   padding: 20px;
   display: block;
+  overflow-y: scroll;
+  height: 74vh;
 }
-.chat-sender-set-bottom{
+.chat-sender-set-bottom {
   position: absolute;
   bottom: 0;
   width: 80%;
 }
-.chat-sender{
+.chat-sender {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,13 +123,13 @@
   border-top: 1px solid #cacaca;
   align-self: end;
 }
-.send-images{
+.send-images {
   font-size: 20px;
   border: none;
   background: transparent;
   cursor: pointer;
 }
-.send-button{
+.send-button {
   font-size: 25px;
   border: none;
   background: none;
@@ -142,17 +137,17 @@
   padding-bottom: 0;
   border-radius: 50%;
 }
-.send-button:hover{
+.send-button:hover {
   cursor: pointer;
   color: #0041c2;
 }
-.tap-on-chat{
+.tap-on-chat {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
-.tap-on-chat-text{
+.tap-on-chat-text {
   font-size: 20px;
   display: flex;
   align-items: center;

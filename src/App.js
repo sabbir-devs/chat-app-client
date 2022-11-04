@@ -5,6 +5,7 @@ import Chat from './Components/Chat/Chat';
 import Signup from './Components/Signup/Signup';
 import NotFound from './Components/NotFound/NotFound';
 import LoginUsers from './Components/LoginUsers/LoginUsers';
+import ProtectedPage from './utils/ProtectedPage/ProtectedPage';
 
 function App() {
   // const {user, isLoading, error} = useSelector((state) => state.user)
@@ -13,7 +14,11 @@ function App() {
     <div className="App">
       {/* <Header /> */}
       <Routes>
-        <Route path='/' element={<Chat />}></Route>
+        <Route path='/' element={
+          <ProtectedPage>
+            <Chat />
+          </ProtectedPage>
+        }></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/login' element={<LoginUsers />}></Route>
         <Route path='/chat' element={<Chat />}></Route>
