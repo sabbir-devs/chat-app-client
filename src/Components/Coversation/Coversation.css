@@ -1,0 +1,53 @@
+/*========================================== CHAT USERS ==========================================*/
+.conversation {
+    display: grid;
+    grid-gap: 10px;
+    box-shadow: 0 0 25px -15px #000;
+    padding: 5px 20px;
+    margin-top: 10px;
+  }
+  .conversation:hover {
+    background: #f6f6f6;
+    cursor: pointer;
+  }
+  .conversesion-user {
+    display: flex;
+    align-items: center;
+  }
+  .online-dot {
+    width: 20px;
+    height: 20px;
+    background: #31a24c;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: 37px;
+  }
+  .offline-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #878885;
+    position: absolute;
+    margin-top: 37px;
+  }
+  .follower-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0px 3px 5px 3px;
+    border: 2px solid #878885;
+  }
+  .userNameMsg {
+    display: grid;
+    align-items: center;
+    margin-left: 10px;
+    color: #000;
+  }
+  .user-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .online-offline {
+    font-size: 12px;
+  }

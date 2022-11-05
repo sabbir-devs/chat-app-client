@@ -1,21 +1,19 @@
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
-import './Chat.css';
-import { baseUrl } from '../../utils/constantData/constantData';
-import defaultProfile from '../../images/defaultProfile.png';
+import React, { useEffect, useRef, useState } from 'react';
+import { BiConversation } from 'react-icons/bi';
 import { BsImages } from 'react-icons/bs';
 import { IoSend } from 'react-icons/io5';
-import { BiConversation } from 'react-icons/bi';
-import InputEmoji from 'react-input-emoji';
 import { format } from 'timeago.js';
+import { baseUrl } from '../../utils/constantData/constantData';
+import defaultProfile from '../../images/defaultProfile.png';
+import InputEmoji from 'react-input-emoji';
+import './ChatBox.css';
 
-const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, }) => {
+
+const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online }) => {
     const [userData, setUserData] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessages, setNewMessages] = useState('');
-    useEffect(() => {
-        
-    },[])
+
     const scroll = useRef();
     const imageRef = useRef();
 
@@ -57,7 +55,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, }) =
                     setMessages(data.data)
                 })
         }
-    }, [currentChat]);
+    }, [currentChat, newMessages]);
 
     // Always scroll to last Message
     useEffect(() => {
@@ -74,6 +72,10 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, }) =
                 chatId: currentChat._id
             }
 
+            // send message to socket server
+            const reciverId = currentChat.members.find((id) => id !== currentUser);
+            setSendMessage({ ...message, reciverId })
+
             // send message to mongodb
             fetch(`${baseUrl}/message`, {
                 method: "POST",
@@ -88,23 +90,21 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, }) =
                     console.log(data)
                     setMessages([...messages, data])
                     setNewMessages("");
-                })
-
-            // send message to socket server
-            const reciverId = currentChat.members.find((id) => id !== currentUser);
-            setSendMessage({ ...message, reciverId })
+                });
         }
     }
+
     return (
         <div className='chat-box-wrapper'>
             {currentChat ? (<>
                 <div className="chat-box-container">
                     <div className='conversesion-user chat-box-conversesion'>
-                        <div className="online-dot"></div>
+                        {online && <div className="online-dot"></div>}
                         {/* <img className='follower-img' src={userData?.profilePicture? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt="" /> */}
                         <img className='follower-img' src={defaultProfile} alt="" />
                         <div className="userNameMsg">
                             <span className='user-name'>{userData?.name}</span>
+                            {online && <p className='active-now'>Active Now</p>}
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,9 @@
-import React from 'react';
-import './Chat.css';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { baseUrl } from '../../utils/constantData/constantData';
+import React, { useEffect, useState } from 'react';
+import './Coversation.css';
 import defaultProfile from '../../images/defaultProfile.png';
+import { baseUrl } from '../../utils/constantData/constantData';
 
-const ChatUsers = ({ chat, currentUserId }) => {
+const Coversation = ({ chat, currentUserId, online }) => {
     const [userData, setUserData] = useState(null);
     console.log(chat)
     // console.log('current user id',currentUserId)
@@ -24,20 +22,19 @@ const ChatUsers = ({ chat, currentUserId }) => {
                 setUserData(data.data)
             })
     }, [chat.members, currentUserId])
-
     return (
         <div className='follower conversation'>
             <div className='conversesion-user'>
-                <div className="online-dot"></div>
+                {online && <div className="online-dot"></div>}
                 {/* <img className='follower-img' src={userData?.profilePicture? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt="" /> */}
                 <img className='follower-img' src={defaultProfile} alt="" />
                 <div className="userNameMsg">
                     <span className='user-name'>{userData?.name}</span>
-                    <span className='online-offline'>Online</span>
+                    <span style={{ color: online ? "#51e200" : "" }}>{online ? "Online" : "Offline"}</span>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ChatUsers;
+export default Coversation;

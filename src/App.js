@@ -1,11 +1,11 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import Chat from './Components/Chat/Chat';
 import Signup from './Components/Signup/Signup';
 import NotFound from './Components/NotFound/NotFound';
 import LoginUsers from './Components/LoginUsers/LoginUsers';
 import ProtectedPage from './utils/ProtectedPage/ProtectedPage';
+import Chat from './Pages/Chat/Chat';
 
 function App() {
   // const {user, isLoading, error} = useSelector((state) => state.user)

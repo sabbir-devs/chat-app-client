@@ -2,23 +2,23 @@ import React, { useRef, useState } from 'react';
 import './Chat.css';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import Loading from '../Loading/Loading';
+import Loading from '../../Components/Loading/Loading';
 import { useEffect } from 'react';
 import { baseUrl } from '../../utils/constantData/constantData';
-import ChatUsers from './ChatUsers';
-import ChatBox from './ChatBox';
 import { io } from "socket.io-client";
+import ChatBox from '../../Components/ChatBox/ChatBox';
+import Coversation from '../../Components/Coversation/Coversation';
 
 const Chat = () => {
     const { isLoading, user, error } = useSelector((state) => state.user)
-    console.log(user)
+    console.log('user', user)
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null)
     const [reciveMessage, setReciveMessage] = useState(null)
     const socket = useRef()
-    console.log(onlineUsers)
+    console.log('online user', onlineUsers)
 
 
     // get chats from server
@@ -63,7 +63,15 @@ const Chat = () => {
 
     }, [chats])
 
+    // check online users
+    useEffect(() => {
 
+    },[])
+    const handleOnlineStatus = (chat) => {
+        const chatMember = chat?.members.find((member) => member !== user._id);
+        const online = onlineUsers.find((user) => user.userId === chatMember)
+        return online ? true : false
+    }
 
 
 
@@ -83,13 +91,13 @@ const Chat = () => {
                 <div className="chat-list">
                     {chats?.map((chat) => (
                         <div key={chat._id} onClick={() => { setCurrentChat(chat) }}>
-                            <ChatUsers currentUserId={user._id} chat={chat}></ChatUsers>
+                            <Coversation currentUserId={user._id} chat={chat} online={handleOnlineStatus(chat)}></Coversation>
                         </div>))}
                 </div>
             </div>
             {/* RIGHT SIDE Chat */}
             <div className="right-side-chat">
-                <ChatBox currentChat={currentChat} setSendMessage={setSendMessage} reciveMessage={reciveMessage} currentUser={user._id}></ChatBox>
+                <ChatBox currentChat={currentChat} setSendMessage={setSendMessage} reciveMessage={reciveMessage} currentUser={user._id} online={handleOnlineStatus(currentChat)}></ChatBox>
             </div>
         </div>
     );
