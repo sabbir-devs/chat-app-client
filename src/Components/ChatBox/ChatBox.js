@@ -9,7 +9,7 @@ import InputEmoji from 'react-input-emoji';
 import './ChatBox.css';
 
 
-const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online }) => {
+const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online, serConversationText }) => {
     const [userData, setUserData] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessages, setNewMessages] = useState('');
@@ -59,7 +59,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
 
     // Always scroll to last Message
     useEffect(() => {
-        scroll.current?.scrollIntoView({ behavior: "smooth" });
+        scroll.current?.scrollIntoView({ behavior: "auto" });
     }, [messages])
 
     // send message function
@@ -113,7 +113,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
                         <div key={message._id}>
                             <div ref={scroll} className={message.senderId === currentUser ? 'message own' : 'message'}>
                                 <p className='message-text'>{message.text}</p>
-                                <p className='message-time'>{format(message.createdAt)}</p>
+                                <p className='message-time'>{(message.createdAt)}</p>
                             </div>
                         </div>
                     ))}

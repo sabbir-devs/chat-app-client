@@ -16,9 +16,8 @@ const Chat = () => {
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null)
-    const [reciveMessage, setReciveMessage] = useState(null)
+    const [reciveMessage, setReciveMessage] = useState(null);
     const socket = useRef()
-    console.log('online user', onlineUsers)
 
 
     // get chats from server
