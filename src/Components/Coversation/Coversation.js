@@ -5,8 +5,7 @@ import { baseUrl } from '../../utils/constantData/constantData';
 
 const Coversation = ({ chat, currentUserId, online }) => {
     const [userData, setUserData] = useState(null);
-    console.log(chat)
-    // console.log('current user id',currentUserId)
+    console.log('current user id', currentUserId)
 
     useEffect(() => {
         const userId = chat.members.find((id) => id !== currentUserId);
@@ -21,7 +20,7 @@ const Coversation = ({ chat, currentUserId, online }) => {
             .then(data => {
                 setUserData(data.data)
             })
-    }, [chat.members, currentUserId])
+    }, [chat, currentUserId])
     return (
         <div className='follower conversation'>
             <div className='conversesion-user'>

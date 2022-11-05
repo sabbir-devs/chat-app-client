@@ -11,12 +11,11 @@ import Coversation from '../../Components/Coversation/Coversation';
 
 const Chat = () => {
     const { isLoading, user, error } = useSelector((state) => state.user)
-    console.log('user', user)
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null)
-    const [reciveMessage, setReciveMessage] = useState(null);
+    const [reciveMessage, setReciveMessage] = useState(null)
     const socket = useRef()
 
 
@@ -31,10 +30,9 @@ const Chat = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setChats(data.data)
             })
-    }, [user._id])
+    }, [user])
 
     // connect to socket.io
     useEffect(() => {
@@ -56,8 +54,8 @@ const Chat = () => {
     // get message from the socket server
     useEffect(() => {
         socket.current.on('recieve-message', (data) => {
-            console.log("data recive in parent Chat.js file", data)
             setReciveMessage(data)
+            console.log('recived message', data)
         })
 
     }, [chats])

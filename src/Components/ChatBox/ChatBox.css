@@ -1,6 +1,5 @@
 /*========================================== CHAT BOX ==========================================*/
-.chat-box-wrapper {
-}
+
 .chat-box-conversesion {
   border-bottom: 1px solid #cacaca;
   padding: 15px;
@@ -24,23 +23,21 @@
   align-items: stretch;
   padding: 12px;
   border-radius: 15px;
-  background: #00ffff;
-  margin-top: 10px;
+  background: #ddd;
+  margin-top: 15px;
   max-width: 45%;
 }
 .own {
   align-self: flex-end;
   margin-left: auto;
-  background: #31a24c;
+  background: #0084ff;
+  color: #fff;
   display: flex;
 }
 .message-text {
   font-size: 17px;
   font-weight: 600;
-}
-.message-time {
-  font-size: 13px;
-  font-weight: 600;
+  width: 100%;
 }
 .chat-body {
   padding: 20px;

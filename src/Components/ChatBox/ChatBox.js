@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BiConversation } from 'react-icons/bi';
 import { BsImages } from 'react-icons/bs';
 import { IoSend } from 'react-icons/io5';
-import { format } from 'timeago.js';
 import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
 import InputEmoji from 'react-input-emoji';
 import './ChatBox.css';
+import { format } from 'timeago.js';
 
 
-const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online, serConversationText }) => {
+const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online }) => {
     const [userData, setUserData] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessages, setNewMessages] = useState('');
@@ -21,7 +21,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
         if (reciveMessage !== null && reciveMessage.chatId === currentChat._id) {
             setMessages([...messages, reciveMessage])
         }
-    }, [reciveMessage])
+    }, [reciveMessage, currentChat])
 
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
 
     // Always scroll to last Message
     useEffect(() => {
-        scroll.current?.scrollIntoView({ behavior: "auto" });
+        scroll.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages])
 
     // send message function
@@ -113,7 +113,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
                         <div key={message._id}>
                             <div ref={scroll} className={message.senderId === currentUser ? 'message own' : 'message'}>
                                 <p className='message-text'>{message.text}</p>
-                                <p className='message-time'>{(message.createdAt)}</p>
+                                <p className='message-time'>{format(message.createdAt)}</p>
                             </div>
                         </div>
                     ))}
