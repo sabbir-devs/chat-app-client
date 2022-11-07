@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BiConversation } from 'react-icons/bi';
 import { BsImages } from 'react-icons/bs';
-import { IoSend } from 'react-icons/io5';
+import { IoCall, IoSend } from 'react-icons/io5';
+import {FaVideo} from 'react-icons/fa';
+import { HiExclamationCircle } from 'react-icons/hi';
 import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
 import InputEmoji from 'react-input-emoji';
@@ -9,13 +11,17 @@ import './ChatBox.css';
 import { format } from 'timeago.js';
 
 
-const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online }) => {
+const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, online, setLastMessage }) => {
     const [userData, setUserData] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessages, setNewMessages] = useState('');
-
     const scroll = useRef();
     const imageRef = useRef();
+
+    // send last chat to parent component
+    useEffect(() => {
+        setLastMessage(messages.slice(-1))
+    },[messages, setLastMessage])
 
     useEffect(() => {
         if (reciveMessage !== null && reciveMessage.chatId === currentChat._id) {
@@ -59,7 +65,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
 
     // Always scroll to last Message
     useEffect(() => {
-        scroll.current?.scrollIntoView({ behavior: "smooth" });
+        scroll.current?.scrollIntoView({ behavior: "auto" });
     }, [messages])
 
     // send message function
@@ -87,7 +93,6 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     setMessages([...messages, data])
                     setNewMessages("");
                 });
@@ -107,6 +112,11 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
                             {online && <p className='active-now'>Active Now</p>}
                         </div>
                     </div>
+                    <div className="call-user">
+                            <button className='call-user-icon'><IoCall></IoCall></button>
+                            <button className='call-user-icon'><FaVideo></FaVideo></button>
+                            <button className='call-user-icon'><HiExclamationCircle></HiExclamationCircle></button>
+                        </div>
                 </div>
                 <div className="chat-body">
                     {messages?.map(message => (
@@ -138,7 +148,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
                 </div>
             </>) : (
                 <div className='tap-on-chat'>
-                    <p className='tap-on-chat-text'>Tap on a Chat to start Conversation <BiConversation style={{ fontSize: "35px", margin: "10px 0 0 10px" }}></BiConversation></p>
+                    <p className='tap-on-chat-text'>Tap on a Chat to start Conversation<BiConversation style={{ fontSize: "35px", margin: "10px 0 0 10px" }}></BiConversation></p>
                 </div>
             )}
 

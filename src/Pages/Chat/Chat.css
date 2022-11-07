@@ -1,7 +1,7 @@
 .chat {
   display: grid;
   flex-direction: column;
-  grid-template-columns: 2fr 8fr;
+  grid-template-columns: 25% 75%;
   background: #ddd;
 }
 .left-side-chat {
@@ -15,6 +15,89 @@
   background: #fff;
   width: 100%;
 }
+.chat-container{
+  display: block;
+}
+.chat-container-profile-name{
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  padding: 0 20px;
+  margin: 10px 0;
+}
+.chat-container-profile-name h3{
+  margin-top: 7px;
+  margin-left: 8px;
+}
+.chat-container-profile-top{
 
-
+}
+.chat-container-profile-button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.chat-container-profile-buttons{
+ 
+}
+.chat-container-profile-buttons .chat-container-profile-button-icon{
+  font-size: 20px;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  background: rgba(221, 221, 221, 0.704);
+  margin: 0 10px;
+  padding: 5px 5px 0px 5px;
+  border-radius: 50%;
+}
+.chat-container-profile-buttons .chat-container-profile-button-icon:hover{
+  cursor: pointer;
+  box-shadow:  0 0 5px 0 rgb(191, 191, 191);
+  background: #ddd;
+}
+.chat-container-profile-top .chat-container-profile-img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.chat-container .chat-container-profile-button{
+  padding: 0 20px;
+}
+.chat-container-searchbar{
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-search-bar{
+  margin-bottom: 20px;
+  background: rgba(221, 221, 221, 0.519);
+  border-radius: 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-search-bar .search-bar-icon{
+  font-size: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+  bottom: -5px;
+}
+.chat-search-bar input{
+  padding: 8px 5px;
+  border: none;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.919);
+  background: transparent;
+}
+.chat-search-bar input::placeholder{
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.908);
+}
+.chat-search-bar input:focus{
+  outline: none;
+}
 

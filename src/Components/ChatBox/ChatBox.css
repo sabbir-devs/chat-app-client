@@ -1,4 +1,9 @@
 /*========================================== CHAT BOX ==========================================*/
+.chat-box-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .chat-box-conversesion {
   border-bottom: 1px solid #cacaca;
@@ -16,6 +21,26 @@
   font-weight: 500;
   margin-top: 2px;
   letter-spacing: -0.5px;
+}
+.call-user{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+.call-user-icon{
+  font-size: 25px;
+  color: #0084ff;
+  font-weight: 600;
+  border: none;
+  margin: 0 10px;
+  padding: 5px 5px 0px 5px;
+  border-radius: 50%;
+  background: transparent;
+}
+.call-user-icon:hover{
+  background: rgba(221, 221, 221, 0.704);
+  cursor: pointer;
 }
 .message {
   display: flex;
@@ -48,7 +73,7 @@
 .chat-sender-set-bottom {
   position: absolute;
   bottom: 0;
-  width: 80%;
+  width: 75%;
 }
 .chat-sender {
   display: flex;
@@ -87,4 +112,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bolder;
+  color: rgb(74, 74, 74);
 }
