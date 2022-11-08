@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './Chat.css';
 import toast from 'react-hot-toast';
-import { useSelector } from 'react-redux';
-import defaultProfile from '../../images/defaultProfile.png';
+import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../Components/Loading/Loading';
 import { useEffect } from 'react';
 import { baseUrl } from '../../utils/constantData/constantData';
@@ -11,9 +10,11 @@ import ChatBox from '../../Components/ChatBox/ChatBox';
 import Coversation from '../../Components/Coversation/Coversation';
 import { IoCreateOutline } from 'react-icons/io5';
 import { RiVideoAddFill } from 'react-icons/ri';
-import { BsThreeDots } from 'react-icons/bs';
+import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
 import { GoSearch } from 'react-icons/go';
 import menImg1 from '../../images/men-img-1.jpg'
+import { BiEditAlt, BiLeftArrowAlt } from 'react-icons/bi';
+import { logOut } from '../../lib/reducers/authSlice';
 
 const Chat = () => {
     const { isLoading, user, error } = useSelector((state) => state.user)
@@ -23,7 +24,9 @@ const Chat = () => {
     const [sendMessage, setSendMessage] = useState(null)
     const [reciveMessage, setReciveMessage] = useState(null)
     const [lastMessage, setLastMessage] = useState('');
-    const socket = useRef()
+    const [leftSideModal, setLeftSideModal] = useState(false)
+    const socket = useRef();
+    const dispatch = useDispatch();
 
     console.log('last message from chat component', lastMessage)
 
@@ -74,6 +77,10 @@ const Chat = () => {
         return online ? true : false
     }
 
+    // left side modal toggle
+    const profileImageClick = () => {
+        setLeftSideModal(!leftSideModal)
+    }
 
 
     if (isLoading) {
@@ -89,12 +96,13 @@ const Chat = () => {
                 <div className="chat-container">
                     <div className="chat-container-profile-top">
                         <div className="chat-container-profile-name">
-                            <img className='chat-container-profile-img' src={menImg1} alt="" />
+                            <img onClick={profileImageClick} className='chat-container-profile-img' src={menImg1} alt="" />
                             <h3>{user?.name.slice(0, 15) + '...'}</h3>
                         </div>
                         <div className='chat-container-profile-button'>
                             <h2>Chat</h2>
                             <div className='chat-container-profile-buttons'>
+                                <button className='chat-container-profile-button-icon'><BsFillCameraFill></BsFillCameraFill></button>
                                 <button className='chat-container-profile-button-icon'><BsThreeDots></BsThreeDots></button>
                                 <button className='chat-container-profile-button-icon'><RiVideoAddFill></RiVideoAddFill></button>
                                 <button className='chat-container-profile-button-icon'><IoCreateOutline></IoCreateOutline></button>
@@ -110,6 +118,24 @@ const Chat = () => {
                     <div className="chat-container-profile-bottom">
 
                     </div>
+                    {/* left side modal */}
+                    <div className="left-side-modal" style={{ left: leftSideModal ? '0px' : '-100000px' }}>
+                        <div className='tob-button'>
+                            <button title='Close' className='left-modal-closeBtn' onClick={() => { setLeftSideModal(!leftSideModal) }}><BiLeftArrowAlt></BiLeftArrowAlt></button>
+                            <button title='Edit' className='left-modal-closeBtn' onClick={() => { console.log('Edit profile button click') }}><BiEditAlt></BiEditAlt></button>
+                        </div>
+                        <div className="left-modal-top">
+                            <div className="lmt-profile-img">
+                                <img src={menImg1} alt="" />
+                                <button onClick={() => { console.log('change profile button click') }} className='lmt-profile-cam'><BsFillCameraFill className='lmt-profile-cam-icon'></BsFillCameraFill></button>
+                            </div>
+                            <h3>{user?.name}</h3>
+                        </div>
+                        <div className="left-modal-middle"></div>
+                        <div className="left-modal-bottom">
+                            <button className='logout-btn' onClick={() => {dispatch(logOut())}}>Log Out</button>
+                        </div>
+                    </div>
                 </div>
                 <div className="chat-list">
                     {chats?.map((chat) => (
@@ -120,7 +146,7 @@ const Chat = () => {
                 </div>
             </div>
             {/* RIGHT SIDE Chat */}
-            <div className="right-side-chat">
+            <div className="right-side-chat" onClick={() => { setLeftSideModal(false) }}>
                 <ChatBox currentChat={currentChat} setSendMessage={setSendMessage} reciveMessage={reciveMessage} currentUser={user._id} online={handleOnlineStatus(currentChat)} setLastMessage={setLastMessage}></ChatBox>
             </div>
         </div>

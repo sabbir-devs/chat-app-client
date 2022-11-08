@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 import { baseUrl } from "../../utils/constantData/constantData";
 
 const user = JSON.parse(localStorage.getItem('user'))
@@ -26,6 +25,9 @@ export const loginUser = createAsyncThunk('loginuser', async (body) => {
     return await res.json();
 })
 
+export const logOut = createAsyncThunk('logOutUser', () => {
+    console.log('logout call from auth slice')
+})
 
 const authSlice = createSlice({
     name: "user",
@@ -68,6 +70,10 @@ const authSlice = createSlice({
         [loginUser.rejected]: (state, action) => {
             state.isLoading = false;
             state.error = action.error.message;
+        },
+        [logOut.fulfilled]: (state) => {
+            state.user = null;
+            localStorage.clear();
         }
     }
 })

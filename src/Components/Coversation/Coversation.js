@@ -32,7 +32,7 @@ const Coversation = ({ chat, currentUserId, online, lastMessage }) => {
                     {/* <span style={{ color: online ? "#51e200" : "" }}>{online ? "Online" : "Offline"}</span> */}
                     <div className='last-text-time'>
                         {lastMessage && <span>{lastMessage[0]?.text?.slice(0, 8) + '..'}</span>}
-                        {lastMessage && <span>{format(lastMessage[0]?.createdAt)?.slice(0, 3)}</span>}
+                        {lastMessage && <span>{format(lastMessage[0]?.createdAt).slice(0, 4)}</span>}
                     </div>
                 </div>
             </div>

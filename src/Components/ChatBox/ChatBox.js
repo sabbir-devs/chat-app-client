@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BiConversation } from 'react-icons/bi';
 import { BsImages } from 'react-icons/bs';
 import { IoCall, IoSend } from 'react-icons/io5';
-import {FaVideo} from 'react-icons/fa';
+import { FaVideo } from 'react-icons/fa';
 import { HiExclamationCircle } from 'react-icons/hi';
 import { baseUrl } from '../../utils/constantData/constantData';
 import defaultProfile from '../../images/defaultProfile.png';
@@ -21,13 +21,13 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
     // send last chat to parent component
     useEffect(() => {
         setLastMessage(messages.slice(-1))
-    },[messages, setLastMessage])
+    }, [messages, setLastMessage])
 
     useEffect(() => {
         if (reciveMessage !== null && reciveMessage.chatId === currentChat._id) {
             setMessages([...messages, reciveMessage])
         }
-    }, [reciveMessage, currentChat])
+    }, [reciveMessage, currentChat, messages])
 
 
     useEffect(() => {
@@ -113,10 +113,10 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
                         </div>
                     </div>
                     <div className="call-user">
-                            <button className='call-user-icon'><IoCall></IoCall></button>
-                            <button className='call-user-icon'><FaVideo></FaVideo></button>
-                            <button className='call-user-icon'><HiExclamationCircle></HiExclamationCircle></button>
-                        </div>
+                        <button className='call-user-icon'><IoCall></IoCall></button>
+                        <button className='call-user-icon'><FaVideo></FaVideo></button>
+                        <button className='call-user-icon'><HiExclamationCircle></HiExclamationCircle></button>
+                    </div>
                 </div>
                 <div className="chat-body">
                     {messages?.map(message => (

@@ -10,38 +10,42 @@
   display: block;
   box-shadow: 0 0 20px 0px #999;
   border-right: 2px solid #ddd;
+  position: relative;
+}
+.left-side-modal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  z-index: 1;
+  transition: 0.1s ease;
 }
 .right-side-chat {
   background: #fff;
   width: 100%;
 }
-.chat-container{
+.chat-container {
   display: block;
 }
-.chat-container-profile-name{
+.chat-container-profile-name {
   display: flex;
   align-items: center;
   justify-content: baseline;
   padding: 0 20px;
   margin: 10px 0;
 }
-.chat-container-profile-name h3{
+.chat-container-profile-name h3 {
   margin-top: 7px;
   margin-left: 8px;
 }
-.chat-container-profile-top{
-
-}
-.chat-container-profile-button{
+.chat-container-profile-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.chat-container-profile-buttons{
- 
-}
-.chat-container-profile-buttons .chat-container-profile-button-icon{
+.chat-container-profile-buttons .chat-container-profile-button-icon {
   font-size: 20px;
   color: #000;
   font-weight: 600;
@@ -51,27 +55,27 @@
   padding: 5px 5px 0px 5px;
   border-radius: 50%;
 }
-.chat-container-profile-buttons .chat-container-profile-button-icon:hover{
+.chat-container-profile-buttons .chat-container-profile-button-icon:hover {
   cursor: pointer;
-  box-shadow:  0 0 5px 0 rgb(191, 191, 191);
+  box-shadow: 0 0 5px 0 rgb(191, 191, 191);
   background: #ddd;
 }
-.chat-container-profile-top .chat-container-profile-img{
+.chat-container-profile-top .chat-container-profile-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
 }
-.chat-container .chat-container-profile-button{
+.chat-container .chat-container-profile-button {
   padding: 0 20px;
 }
-.chat-container-searchbar{
+.chat-container-searchbar {
   padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.chat-search-bar{
+.chat-search-bar {
   margin-bottom: 20px;
   background: rgba(221, 221, 221, 0.519);
   border-radius: 25px;
@@ -80,24 +84,96 @@
   align-items: center;
   justify-content: center;
 }
-.chat-search-bar .search-bar-icon{
+.chat-search-bar .search-bar-icon {
   font-size: 20px;
   margin-right: 10px;
   margin-top: 5px;
   bottom: -5px;
 }
-.chat-search-bar input{
+.chat-search-bar input {
   padding: 8px 5px;
   border: none;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.919);
   background: transparent;
 }
-.chat-search-bar input::placeholder{
+.chat-search-bar input::placeholder {
   font-size: 16px;
   color: rgba(0, 0, 0, 0.908);
 }
-.chat-search-bar input:focus{
+.chat-search-bar input:focus {
   outline: none;
 }
 
+/*=================== Modal Style Start ===================*/
+.left-side-modal {
+  padding: 10px 20px;
+  display: block;
+}
+.tob-button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left-modal-top{
+  display: grid;
+  justify-content: center;
+}
+.left-modal-top h3{
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+.left-modal-closeBtn {
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+.icons-hover:hover {
+  text-shadow: 0 0 10px #000;
+}
+.lmt-profile-img {
+  margin-top: 10px;
+}
+.lmt-profile-img img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+}
+.lmt-profile-img .lmt-profile-cam {
+  border: 2.5px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  padding: 3px 4px 2px 4px;
+  background: rgb(72, 72, 72);
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 67px;
+  margin-left: -30px;
+}
+.lmt-profile-cam-icon {
+  font-size: 20px;
+  color: #fff;
+}
+
+.left-modal-bottom .logout-btn{
+  border: none;
+  width: 100%;
+  background: transparent;
+  padding: 8px 10px;
+  color: #000;
+  text-align: start;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.left-modal-bottom .logout-btn:hover{
+  background: rgb(206, 206, 206);
+  cursor: pointer;
+}
+/*=================== Modal Style End ===================*/
