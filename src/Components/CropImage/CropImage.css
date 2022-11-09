@@ -1,0 +1,42 @@
+.image-cropper{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: none;
+    border-radius: 3px;
+    background: rgb(255, 255, 255);
+}
+.crop-image{
+    display: block;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+}
+.buttons{
+    z-index: 6;
+}
+.cancle-btn{
+    border: none;
+    background: rgba(255, 0, 0, 0.422);
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+.cancle-btn:hover{
+    background: rgba(255, 0, 0, 0.586);
+}
+.upload-btn{
+    border: none;
+    background: rgba(47, 255, 0, 0.422);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.upload-btn:hover{
+    background: rgba(38, 255, 0, 0.642);
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BiConversation } from 'react-icons/bi';
+import { BiConversation, BiLeftArrowAlt } from 'react-icons/bi';
 import { BsImages } from 'react-icons/bs';
 import { IoCall, IoSend } from 'react-icons/io5';
 import { FaVideo } from 'react-icons/fa';
@@ -103,6 +103,7 @@ const ChatBox = ({ currentChat, setSendMessage, reciveMessage, currentUser, onli
         <div className='chat-box-wrapper'>
             {currentChat ? (<>
                 <div className="chat-box-container">
+                    <button className='left-arrow-btn'><BiLeftArrowAlt></BiLeftArrowAlt></button>
                     <div className='conversesion-user chat-box-conversesion'>
                         {online && <div className="online-dot"></div>}
                         {/* <img className='follower-img' src={userData?.profilePicture? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt="" /> */}

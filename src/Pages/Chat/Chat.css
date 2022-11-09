@@ -4,13 +4,19 @@
   grid-template-columns: 25% 75%;
   background: #ddd;
 }
+.chat-list{
+  overflow-y: auto;
+  max-height: 70vh;
+}
+.chat-list::-webkit-scrollbar{
+  display: none;
+}
 .left-side-chat {
   background-color: rgb(255, 255, 255);
   height: 100vh;
   display: block;
-  box-shadow: 0 0 20px 0px #999;
-  border-right: 2px solid #ddd;
   position: relative;
+  border-right: 2px solid #ddd;
 }
 .left-side-modal {
   position: absolute;
@@ -171,9 +177,17 @@
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 .left-modal-bottom .logout-btn:hover{
-  background: rgb(206, 206, 206);
+  background: rgba(255, 0, 0, 0.362);
   cursor: pointer;
+}
+.crop-image-modal{
+  position: absolute;
+  z-index: 5;
+  left: 40%;
+  top: 10%;
 }
 /*=================== Modal Style End ===================*/

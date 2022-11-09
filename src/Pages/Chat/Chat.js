@@ -9,12 +9,13 @@ import { io } from "socket.io-client";
 import ChatBox from '../../Components/ChatBox/ChatBox';
 import Coversation from '../../Components/Coversation/Coversation';
 import { IoCreateOutline } from 'react-icons/io5';
-import { RiVideoAddFill } from 'react-icons/ri';
+import { RiLogoutCircleRLine, RiVideoAddFill } from 'react-icons/ri';
 import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
 import { GoSearch } from 'react-icons/go';
 import menImg1 from '../../images/men-img-1.jpg'
 import { BiEditAlt, BiLeftArrowAlt } from 'react-icons/bi';
 import { logOut } from '../../lib/reducers/authSlice';
+import CropImage from '../../Components/CropImage/CropImage';
 
 const Chat = () => {
     const { isLoading, user, error } = useSelector((state) => state.user)
@@ -24,11 +25,13 @@ const Chat = () => {
     const [sendMessage, setSendMessage] = useState(null)
     const [reciveMessage, setReciveMessage] = useState(null)
     const [lastMessage, setLastMessage] = useState('');
-    const [leftSideModal, setLeftSideModal] = useState(false)
+    const [leftSideModal, setLeftSideModal] = useState(false);
+    const [profileImage, setProfileImage] = useState('');
     const socket = useRef();
+    const inputRef = useRef();
     const dispatch = useDispatch();
 
-    console.log('last message from chat component', lastMessage)
+
 
     // get chats from server
     useEffect(() => {
@@ -83,13 +86,49 @@ const Chat = () => {
     }
 
 
+    // send image to server
+
+    const handleOnChange = (event) => {
+        if (event.target.files && event.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            reader.addEventListener('load', () =>{
+                console.log(reader.result)
+                setProfileImage(reader.result);
+            })
+        }
+    }
+
+    // const handleImageSubmit = (event) => {
+    //     const formData = new FormData();
+    //     formData.append('image', profileImage)
+    //     setImage(formData)
+
+    //     console.log('form data', formData);
+
+    //     fetch(`${baseUrl}/user/profile-picture`, {
+    //         method: "POST",
+    //         body: JSON.stringify(formData)
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data)
+
+    //         })
+    // }
+
     if (isLoading) {
         return <Loading></Loading>
     }
     if (error) {
         return toast.error(error.message);
     }
-    return (
+    return (<>
+        {/* center modals */}
+        <div className="crop-image-modal" style={{ display: profileImage ? 'grid' : 'none' }}>
+            <CropImage image={profileImage} setProfileImage={setProfileImage}></CropImage>
+            {/* <img src={image} alt="" style={{width:'400px', height:'400px'}}/> */}
+        </div>
         <div className='chat'>
             {/* Left side Chat */}
             <div className="left-side-chat">
@@ -127,13 +166,15 @@ const Chat = () => {
                         <div className="left-modal-top">
                             <div className="lmt-profile-img">
                                 <img src={menImg1} alt="" />
-                                <button onClick={() => { console.log('change profile button click') }} className='lmt-profile-cam'><BsFillCameraFill className='lmt-profile-cam-icon'></BsFillCameraFill></button>
+                                <input type="file" accept='image/*' name='image' ref={inputRef} onChange={handleOnChange} style={{ display: 'none' }} id="" />
+                                <button onClick={() => { inputRef.current.click() }} className='lmt-profile-cam'><BsFillCameraFill className='lmt-profile-cam-icon'></BsFillCameraFill></button>
                             </div>
                             <h3>{user?.name}</h3>
                         </div>
-                        <div className="left-modal-middle"></div>
+                        <div className="left-modal-middle">
+                        </div>
                         <div className="left-modal-bottom">
-                            <button className='logout-btn' onClick={() => {dispatch(logOut())}}>Log Out</button>
+                            <button className='logout-btn' onClick={() => { dispatch(logOut()) }}><RiLogoutCircleRLine style={{ marginRight: '8px', fontSize: '25px' }}></RiLogoutCircleRLine>Log Out</button>
                         </div>
                     </div>
                 </div>
@@ -146,10 +187,14 @@ const Chat = () => {
                 </div>
             </div>
             {/* RIGHT SIDE Chat */}
-            <div className="right-side-chat" onClick={() => { setLeftSideModal(false) }}>
+            <div className="right-side-chat" onClick={() => {
+                setLeftSideModal(false)
+                setProfileImage('')
+            }}>
                 <ChatBox currentChat={currentChat} setSendMessage={setSendMessage} reciveMessage={reciveMessage} currentUser={user._id} online={handleOnlineStatus(currentChat)} setLastMessage={setLastMessage}></ChatBox>
             </div>
         </div>
+    </>
     );
 };
 
