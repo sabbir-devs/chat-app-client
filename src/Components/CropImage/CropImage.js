@@ -1,4 +1,3 @@
-import { Slider } from '@mui/material';
 import React from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
@@ -6,27 +5,28 @@ import Cropper from 'react-easy-crop';
 import { baseUrl } from '../../utils/constantData/constantData';
 import './CropImage.css';
 
-const CropImage = ({ image, setProfileImage }) => {
+const CropImage = ({ image, profileImage, setProfileImage }) => {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [zoom, setZoom] = useState(1);
     const [croppedArea, setCroppedArea] = useState(null);
 
 
     const onCropComplete = useCallback((croppedArea, CroppedAreaPixels) => {
-        console.log('corped area', croppedArea, CroppedAreaPixels)
         setCroppedArea(CroppedAreaPixels)
     }, [])
 
-    console.log('cropped Area', croppedArea);
 
     const handleUploadProfilePic = () => {
+        const formData = new FormData();
+        formData.append('image', croppedArea);
         fetch(`${baseUrl}/user/profile-picture`,{
             method: "POST",
-            body: JSON.stringify(image)
+            body: (formData)
         })
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            setProfileImage(null)
         })
     }
 

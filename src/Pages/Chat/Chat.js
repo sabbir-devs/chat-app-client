@@ -26,7 +26,8 @@ const Chat = () => {
     const [reciveMessage, setReciveMessage] = useState(null)
     const [lastMessage, setLastMessage] = useState('');
     const [leftSideModal, setLeftSideModal] = useState(false);
-    const [profileImage, setProfileImage] = useState('');
+    const [profileImage, setProfileImage] = useState(null);
+    const [image, setImage] = useState(null);
     const socket = useRef();
     const inputRef = useRef();
     const dispatch = useDispatch();
@@ -65,6 +66,13 @@ const Chat = () => {
         }
     }, [sendMessage])
 
+    // useEffect(() => {
+    //     if (sendMessage !== null) {
+    //         socket.current.emit('private-message', sendMessage)
+    //         console.log('send private message on socket server', sendMessage)
+    //     }
+    // }, [sendMessage])
+
     // get message from the socket server
     useEffect(() => {
         socket.current.on('recieve-message', (data) => {
@@ -72,7 +80,7 @@ const Chat = () => {
             console.log('recived message', data)
         })
 
-    }, [chats])
+    }, [currentChat, chats])
 
     const handleOnlineStatus = (chat) => {
         const chatMember = chat?.members.find((member) => member !== user._id);
@@ -82,7 +90,7 @@ const Chat = () => {
 
     // left side modal toggle
     const profileImageClick = () => {
-        setLeftSideModal(!leftSideModal)
+        setLeftSideModal(!leftSideModal);
     }
 
 
@@ -90,32 +98,16 @@ const Chat = () => {
 
     const handleOnChange = (event) => {
         if (event.target.files && event.target.files.length > 0) {
+            setProfileImage(event.target.files[0]);
             const reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
             reader.addEventListener('load', () =>{
                 console.log(reader.result)
-                setProfileImage(reader.result);
+                setImage(reader.result);
             })
         }
     }
 
-    // const handleImageSubmit = (event) => {
-    //     const formData = new FormData();
-    //     formData.append('image', profileImage)
-    //     setImage(formData)
-
-    //     console.log('form data', formData);
-
-    //     fetch(`${baseUrl}/user/profile-picture`, {
-    //         method: "POST",
-    //         body: JSON.stringify(formData)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-
-    //         })
-    // }
 
     if (isLoading) {
         return <Loading></Loading>
@@ -126,7 +118,7 @@ const Chat = () => {
     return (<>
         {/* center modals */}
         <div className="crop-image-modal" style={{ display: profileImage ? 'grid' : 'none' }}>
-            <CropImage image={profileImage} setProfileImage={setProfileImage}></CropImage>
+            <CropImage image={image} profileImage={profileImage} setProfileImage={setProfileImage}></CropImage>
             {/* <img src={image} alt="" style={{width:'400px', height:'400px'}}/> */}
         </div>
         <div className='chat'>
@@ -181,8 +173,7 @@ const Chat = () => {
                 <div className="chat-list">
                     {chats?.map((chat) => (
                         <div key={chat._id} onClick={() => { setCurrentChat(chat) }}>
-                            <Coversation currentUserId={user._id} chat={chat} online={handleOnlineStatus(chat)} lastMessage={lastMessage
-                            }></Coversation>
+                            <Coversation currentUserId={user._id} chat={chat} online={handleOnlineStatus(chat)} lastMessage={lastMessage}></Coversation>
                         </div>))}
                 </div>
             </div>

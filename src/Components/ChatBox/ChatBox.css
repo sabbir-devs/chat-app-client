@@ -1,40 +1,40 @@
 /*========================================== CHAT BOX ==========================================*/
-.chat-box-container{
+.chat-box-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #cacaca;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1.5px solid #e7e7e7;
 }
-.left-arrow-btn{
+.left-arrow-btn {
   border: none;
   background: transparent;
   font-size: 30px;
-  margin-left:10px;
+  margin-left: 10px;
   cursor: pointer;
 }
 .chat-box-conversesion {
   padding: 15px;
-  width: 100%;
   position: relative;
   top: 0;
 }
-.user-name{
+.user-name {
   font-size: 18px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
-.active-now{
+.active-now {
   font-size: 14px;
   font-weight: 500;
   margin-top: 2px;
   letter-spacing: -0.5px;
 }
-.call-user{
+.call-user {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
 }
-.call-user-icon{
+.call-user-icon {
   font-size: 25px;
   color: #0084ff;
   font-weight: 600;
@@ -44,9 +44,12 @@
   border-radius: 50%;
   background: transparent;
 }
-.call-user-icon:hover{
+.call-user-icon:hover {
   background: rgba(221, 221, 221, 0.704);
   cursor: pointer;
+}
+.call-user-icon:active {
+  background: rgba(179, 179, 179, 0.704);
 }
 .message {
   display: flex;
@@ -74,31 +77,11 @@
   padding: 20px;
   display: block;
   overflow-y: scroll;
-  height: 74vh;
-}
-.chat-body::-webkit-scrollbar{
-  width: 10px;
-}
-.chat-body::-webkit-scrollbar-track {
-  background: #dcdcdc; 
-  border-radius: 25px
-};
-.chat-body::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.356);
-  border-radius: 25px;
-}
-.chat-body::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.837);
-  border-radius: 25px;
-}
-.chat-body::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.548); 
-  border-radius: 25px;
+  height: 73vh;
 }
 .chat-sender-set-bottom {
-  position: absolute;
   bottom: 0;
-  width: 75%;
+  width: 100%;
 }
 .chat-sender {
   display: flex;
@@ -107,6 +90,7 @@
   padding: 10px 20px;
   border-top: 1px solid #cacaca;
   align-self: end;
+  border-right: 1.5px solid #e9e9e9;
 }
 .send-images {
   font-size: 20px;
@@ -139,4 +123,88 @@
   justify-content: center;
   font-weight: bolder;
   color: rgb(74, 74, 74);
+}
+
+/* Chat box right section */
+.chat-box-half-container {
+  display: flex;
+  align-items: center;
+  transition: 0.5s ease;
+}
+.chat-box-half-container .chat-box-half-left {
+  width: 70%;
+}
+.chat-box-half-container .chat-box-half-right {
+  width: 30%;
+  height: 100vh;
+  padding: 0 20px;
+}
+.chat-half-right-top {
+  margin: 20px 0px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.chat-half-right-top img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+.chat-half-right-top-text {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.chat-half-right-top-active-text {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  color: rgb(73, 73, 73);
+}
+.online-dot-profile {
+  width: 20px;
+  height: 20px;
+  background: #31a24c;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 74px;
+  margin-left: 63px;
+}
+.chat-half-right-top-icons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-half-right-profile-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.chat-half-right-profile-buttons button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  background: rgba(221, 221, 221, 0.704);
+  margin: 0 10px;
+  padding: 5px 5px 0px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.chat-half-right-profile-buttons .icons {
+  padding: 1px;
+}
+.chat-half-right-profile-buttons p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.chat-half-right-bottom{
+  top: 0;
 }
